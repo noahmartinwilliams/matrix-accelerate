@@ -1,10 +1,10 @@
-name:                accelerate-matrix
+name:                matrix-accelerate
 version:             0.1.0.0
-github:              "githubuser/accelerate-matrix"
+github:              "githubuser/matrix-accelerate"
 license:             BSD-3-Clause
-author:              "Author name here"
-maintainer:          "example@example.com"
-copyright:           "2024 Author name here"
+author:              "Noah Martin Williams"
+maintainer:          "noahmartinwilliams@gmail.com"
+copyright:           "2024 Noah Williams"
 
 extra-source-files:
 - README.md
@@ -41,7 +41,6 @@ library:
   dependencies:
   - accelerate
   - accelerate-llvm-ptx
-  - lens-accelerate
 
 executables:
   accelerate-matrix-exe:
