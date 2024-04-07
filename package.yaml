@@ -41,17 +41,7 @@ library:
   dependencies:
   - accelerate
   - accelerate-llvm-ptx
-
-executables:
-  accelerate-matrix-exe:
-    main:                Main.hs
-    source-dirs:         app
-    ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
-    dependencies:
-    - accelerate-matrix
+  - lens-accelerate
 
 tests:
   accelerate-matrix-test:
@@ -61,5 +51,3 @@ tests:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
-    dependencies:
-    - accelerate-matrix

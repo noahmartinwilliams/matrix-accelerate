@@ -1,3 +1,3 @@
 # accelerate-matrix
 
-Matrix operations for accelerate matrices.
+Matrix operations for accelerate.

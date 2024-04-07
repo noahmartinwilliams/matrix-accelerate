@@ -1,6 +1,6 @@
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE FlexibleContexts #-}
-module Data.Array.Accelerate.Matrix where
+module Data.Array.Accelerate.Matrix(matMul) where
 
 import Prelude as P
 import Data.Array.Accelerate as A
