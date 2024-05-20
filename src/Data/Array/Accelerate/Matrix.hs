@@ -1,7 +1,7 @@
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE GADTs #-}
-module Data.Array.Accelerate.Matrix(mMul, matMul, identMat, Mat(..), AccMat(..)) where
+module Data.Array.Accelerate.Matrix(mMul, matMul, identMat, Mat(..), AccMat(..), matTransp) where
 
 import Prelude as P
 import Data.Array.Accelerate as A
@@ -44,4 +44,4 @@ matMul :: (Elt e, A.Num e) => AccMat e a b -> AccMat e b c -> AccMat e a c
 matMul (AccMat left a _) (AccMat right _ c) = AccMat (mMul left right) a c
 
 matTransp :: AccMat e a b -> AccMat e b a
-matTransp (AccMat mat a b) = AccMat (A.transpose mat) a b
+matTransp (AccMat mat a b) = AccMat (A.transpose mat) b a
