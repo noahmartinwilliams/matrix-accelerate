@@ -1,7 +1,7 @@
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE GADTs #-}
-module Data.Array.Accelerate.Matrix(mMul, matMul, identMat, Mat(..), AccMat(..), matTransp) where
+module Data.Array.Accelerate.Matrix(mMul, matMul, identMat, Mat(..), AccMat(..), matTransp, matAdd, mAdd) where
 
 import Prelude as P
 import Data.Array.Accelerate as A
@@ -34,6 +34,9 @@ mMul m1 m2 = do
         ret = A.sum (A.zipWith (*) m1Tensor m2Tensor)
     ret
 
+mAdd :: (Elt e, A.Num e) => Acc (Matrix e) -> Acc (Matrix e) -> Acc (Matrix e)
+mAdd left right = A.zipWith (+) left right
+
 data AccMat e a b where 
     AccMat :: (Elt e, A.Num e) => Acc (Matrix e) -> a -> b -> AccMat e a b
 
@@ -42,6 +45,10 @@ data Mat e a b where
 
 matMul :: (Elt e, A.Num e) => AccMat e a b -> AccMat e b c -> AccMat e a c
 matMul (AccMat left a _) (AccMat right _ c) = AccMat (mMul left right) a c
+
+matAdd :: (A.Num e) => AccMat e a b -> AccMat e a b -> AccMat e a b
+matAdd (AccMat left a b) (AccMat right _ _) = AccMat (mAdd left right) a b
+
 
 matTransp :: AccMat e a b -> AccMat e b a
 matTransp (AccMat mat a b) = AccMat (A.transpose mat) b a
