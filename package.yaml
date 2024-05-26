@@ -35,12 +35,8 @@ ghc-options:
 
 library:
   source-dirs: src
-  ghc-options:
-  - -threaded
-  - -rtsopts
   dependencies:
   - accelerate
-  - accelerate-llvm-ptx
   - lens-accelerate
 
 tests:
