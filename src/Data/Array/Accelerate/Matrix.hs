@@ -66,7 +66,6 @@ useMat (Mat mat a b) = AccMat (use mat) a b
 -- let m1 = AccMat (use (fromList (Z:.10:.12) [0..] :: Matrix Int)) A B
 -- let m2 = AccMat (use (fromList (Z:.12:.13) [0..] :: Matrix Int)) B C
 -- let mResult = m1 `matMul` m2
-
 matMul :: A.Num e => AccMat e a b -> AccMat e b c -> AccMat e a c
 matMul (AccMat left a _) (AccMat right _ c) = AccMat (mMul left right) a c
 
