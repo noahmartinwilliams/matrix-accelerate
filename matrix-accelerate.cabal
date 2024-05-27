@@ -6,7 +6,9 @@ cabal-version: 2.2
 
 name:           matrix-accelerate
 version:        0.1.0.0
-description:    Please see the README on GitHub at <https://github.com/githubuser/accelerate-matrix#readme>
+synopsis:       An accelerate library that adds dependently typed matrices.
+description:    An accelerate library that adds dependently typed matrices.
+category:       Accelerate, Matrices, GPU
 homepage:       https://github.com/githubuser/matrix-accelerate#readme
 bug-reports:    https://github.com/githubuser/matrix-accelerate/issues
 author:         Noah Martin Williams
