@@ -26,7 +26,7 @@ rep0 n a = A.replicate (lift (Any:.n)) a
 -}
 
 -- |Multiply two matrices together without dependent types.
-mMul :: (Elt e, A.Num e) => Acc (Matrix e) -> Acc (Matrix e) -> Acc (Matrix e)
+mMul :: A.Num e => Acc (Matrix e) -> Acc (Matrix e) -> Acc (Matrix e)
 mMul m1 m2 = do
     let Z:.m1NumRows:._ = unlift (shape m1 :: Exp (Plain (Z:.Int:.Int))) :: (Z:.Exp Int:.Exp Int)
         Z:._:.m2NumCols = unlift (shape m2 :: Exp (Plain (Z:.Int:.Int))) :: (Z:.Exp Int:.Exp Int)
@@ -36,7 +36,7 @@ mMul m1 m2 = do
     ret
 
 -- |Add two matrices without dependent types.
-mAdd :: (Elt e, A.Num e) => Acc (Matrix e) -> Acc (Matrix e) -> Acc (Matrix e)
+mAdd :: A.Num e => Acc (Matrix e) -> Acc (Matrix e) -> Acc (Matrix e)
 mAdd left right = A.zipWith (+) left right
 
 -- |Subtract one matrix from another without dependent types.
@@ -48,6 +48,7 @@ data AccMat e a b where
     AccMat :: (Elt e, A.Num e) => Acc (Matrix e) -> a -> b -> AccMat e a b
 
 data Mat e a b where
+    -- |Dependently typed plain matrix for passing to compiled functions.
     Mat :: (Elt e, A.Num e) => Matrix e -> a -> b -> Mat e a b
 
 -- |Change the type of a dependently typed matrix from AccMat to Mat.
@@ -66,11 +67,11 @@ useMat (Mat mat a b) = AccMat (use mat) a b
 -- let m2 = AccMat (use (fromList (Z:.12:.13) [0..] :: Matrix Int)) B C
 -- let mResult = m1 `matMul` m2
 
-matMul :: (Elt e, A.Num e) => AccMat e a b -> AccMat e b c -> AccMat e a c
+matMul :: A.Num e => AccMat e a b -> AccMat e b c -> AccMat e a c
 matMul (AccMat left a _) (AccMat right _ c) = AccMat (mMul left right) a c
 
 -- |Add two dependently typed matrices.
-matAdd :: (A.Num e) => AccMat e a b -> AccMat e a b -> AccMat e a b
+matAdd :: A.Num e => AccMat e a b -> AccMat e a b -> AccMat e a b
 matAdd (AccMat left a b) (AccMat right _ _) = AccMat (mAdd left right) a b
 
 -- |Subtract one dependently typed matrix from another.
