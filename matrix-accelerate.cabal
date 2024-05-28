@@ -27,9 +27,8 @@ source-repository head
 
 library
   exposed-modules:
-      Data/Array/Accelerate/Matrix
-  other-modules:
       Data.Array.Accelerate.Matrix
+  other-modules:
       Paths_matrix_accelerate
   autogen-modules:
       Paths_matrix_accelerate
