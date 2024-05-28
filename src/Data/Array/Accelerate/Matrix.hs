@@ -1,6 +1,18 @@
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE GADTs #-}
+{-|
+Module        : Data.Array.Accelerate.Matrix
+Description   : Functions for plain and dependently typed matrix math.
+Copyright     : (c) Noah Martin Williams 2024
+License       : BSD-3-Clause
+Maintainer    : noahmartinwilliams@gmail.com
+Stability     : experimental
+Portability   : POSIX
+
+This module contains functions for doing matrix math such as addition, subtraction, and multiplication
+for both plain and dependently typed matrices.
+-}
 module Data.Array.Accelerate.Matrix(mMul, matMul, identMat, Mat(..), AccMat(..), matTransp, matAdd, mAdd, mSub, matSub, useMat) where
 
 import Prelude as P
@@ -43,10 +55,12 @@ mAdd left right = A.zipWith (+) left right
 mSub :: A.Num e => Acc (Matrix e) -> Acc (Matrix e) -> Acc (Matrix e)
 mSub left right = A.zipWith (-) left right
 
+-- |Dependent type for accelerate matrices.
 data AccMat e a b where 
     -- |Dependently typed accelerated matrix which forces two types to line up.
     AccMat :: (Elt e, A.Num e) => Acc (Matrix e) -> a -> b -> AccMat e a b
 
+-- |Dependent type for plain matrices.
 data Mat e a b where
     -- |Dependently typed plain matrix for passing to compiled functions.
     Mat :: (Elt e, A.Num e) => Matrix e -> a -> b -> Mat e a b
