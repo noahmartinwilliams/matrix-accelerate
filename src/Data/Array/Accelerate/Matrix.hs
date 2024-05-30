@@ -13,7 +13,7 @@ Portability   : POSIX
 This module contains functions for doing matrix math such as addition, subtraction, and multiplication
 for both plain and dependently typed matrices.
 -}
-module Data.Array.Accelerate.Matrix(mMul, matMul, identMat, Mat(..), AccMat(..), matTransp, matAdd, mAdd, mSub, matSub, useMat) where
+module Data.Array.Accelerate.Matrix(mMul, matMul, identMat, Mat(..), AccMat(..), matTransp, matAdd, mAdd, mSub, matSub, useMat, matScale) where
 
 import Prelude as P
 import Data.Array.Accelerate as A
@@ -94,3 +94,6 @@ matSub (AccMat left a b) (AccMat right _ _) = AccMat (mSub left right) a b
 -- |Transpose a dependently typed matrix.
 matTransp :: AccMat e a b -> AccMat e b a
 matTransp (AccMat mat a b) = AccMat (A.transpose mat) b a
+
+matScale :: A.Num e => Exp e -> AccMat e a b -> AccMat e a b
+matScale s (AccMat m a b) = AccMat (A.map (\x -> s * x) m) a b
