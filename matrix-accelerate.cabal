@@ -7,10 +7,10 @@ cabal-version: 2.2
 name:           matrix-accelerate
 version:        0.1.0.0
 synopsis:       An accelerate library that adds dependently typed matrices.
-description:    An accelerate library that adds dependently typed matrices. This library adds the ability to matrix manipulations with or without dependent types to help line up the operations so as to prevent runtime errors.
+description:    An accelerate library that adds dependently typed matrices. This library adds the ability to do matrix manipulations with or without dependent types to help line up the operations so as to prevent runtime errors.
 category:       Accelerate, Matrices, GPU
-homepage:       https://github.com/githubuser/matrix-accelerate#readme
-bug-reports:    https://github.com/githubuser/matrix-accelerate/issues
+homepage:       https://github.com/noahmartinwilliams/matrix-accelerate#readme
+bug-reports:    https://github.com/noahmartinwilliams/matrix-accelerate/issues
 author:         Noah Martin Williams
 maintainer:     noahmartinwilliams@gmail.com
 copyright:      2024 Noah Williams
@@ -23,7 +23,7 @@ extra-doc-files:
 
 source-repository head
   type: git
-  location: https://github.com/githubuser/matrix-accelerate
+  location: https://github.com/noahmartinwilliams/matrix-accelerate
 
 library
   exposed-modules:
@@ -36,7 +36,7 @@ library
       src
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
-      accelerate ==1.3.*
+      accelerate >=1.2 && <1.4
     , base >=4.7 && <5
     , lens-accelerate ==0.3.*
   default-language: Haskell2010

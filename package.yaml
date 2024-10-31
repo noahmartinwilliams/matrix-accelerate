@@ -1,6 +1,6 @@
 name:                matrix-accelerate
 version:             0.1.0.0
-github:              "githubuser/matrix-accelerate"
+github:              "noahmartinwilliams/matrix-accelerate"
 license:             BSD-3-Clause
 author:              "Noah Martin Williams"
 maintainer:          "noahmartinwilliams@gmail.com"
@@ -12,15 +12,8 @@ extra-doc-files:
 - README.md
 - CHANGELOG.md
 
-# Metadata used when publishing your package
-# synopsis:            Short description of your package
-# category:            Web
-
-# To avoid duplicated efforts in documentation and dealing with the
-# complications of embedding Haddock markup inside cabal files, it is
-# common to point users to the README.md file.
 description:         An accelerate library that adds dependently typed matrices. 
-  This library adds the ability to matrix manipulations with or without dependent types to help line up the operations 
+  This library adds the ability to do matrix manipulations with or without dependent types to help line up the operations 
   so as to prevent runtime errors.
 
 dependencies:
@@ -41,7 +34,7 @@ library:
   source-dirs: src
   exposed-modules: Data.Array.Accelerate.Matrix
   dependencies:
-  - accelerate >= 1.3 && < 1.4
+  - accelerate >= 1.2 && < 1.4
   - lens-accelerate >= 0.3 && < 0.4
 
 tests:
