@@ -34,8 +34,8 @@ library:
   source-dirs: src
   exposed-modules: Data.Array.Accelerate.Matrix
   dependencies:
-  - accelerate >= 1.2 && < 1.4
-  - lens-accelerate >= 0.3 && < 0.4
+  - accelerate >= 1.2 && < 1.5
+  - lens-accelerate 
 
 tests:
   accelerate-matrix-test:

@@ -44,8 +44,6 @@ packages:
 pvp-bounds: both
 extra-deps:
 - github: AccelerateHS/accelerate
-  commit: fbee01da36aba525d8c60922d1e83500556d7650
+  commit: c22387ed2e00b00a6c79dcec5d22b53874da91fc
 - github: tmcdonell/lens-accelerate
   commit: c717610c1ea5531d14ef0ca9f8e73e3aa3b80a5e
-- github: ekmett/lens
-  commit: fc2449d5c007ebc79e6ddc0c7ea035b4cdc5a66a
