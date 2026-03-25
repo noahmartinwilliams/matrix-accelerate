@@ -98,3 +98,11 @@ matTransp (AccMat mat a b) = AccMat (A.transpose mat) b a
 -- |Scale a dependently typed matrix.
 matScale :: A.Num e => Exp e -> AccMat e a b -> AccMat e a b
 matScale s (AccMat m a b) = AccMat (A.map (\x -> s * x) m) a b
+
+-- |Take i columns from the matrix and return it with a new specified number of columns.
+matTake :: A.Num e => Exp Int -> AccMat e a b -> c -> AccMat e a c
+matTake i (AccMat e a _) c = AccMat (A.take i e) a c
+
+-- |Drop i columns from the matrix and return it with a new specified number of columns.
+matDrop :: A.Num e => Exp Int -> AccMat e a b -> c -> AccMat e a c
+matDrop i (AccMat e a _) c = AccMat (A.drop i e) a c
