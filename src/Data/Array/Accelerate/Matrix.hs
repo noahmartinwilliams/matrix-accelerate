@@ -106,3 +106,6 @@ matTake i (AccMat e a _) c = AccMat (A.take i e) a c
 -- |Drop i columns from the matrix and return it with a new specified number of columns.
 matDrop :: A.Num e => Exp Int -> AccMat e a b -> c -> AccMat e a c
 matDrop i (AccMat e a _) c = AccMat (A.drop i e) a c
+
+(++) :: A.Num e => AccMat e a b -> AccMat e a c -> d -> AccMat e a d
+(++) (AccMat e a _) (AccMat e' _ _ ) d = AccMat (e A.++ e') a d
