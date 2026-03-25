@@ -13,7 +13,7 @@ for both plain and dependently typed matrices.
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE GADTs #-}
-module Data.Array.Accelerate.Matrix(mMul, matMul, identMat, Mat(..), AccMat(..), matTransp, matAdd, mAdd, mSub, matSub, useMat, matScale) where
+module Data.Array.Accelerate.Matrix(mMul, matMul, identMat, Mat(..), AccMat(..), matTransp, matAdd, mAdd, mSub, matSub, useMat, matScale, matTake, matDrop, matAppend) where
 
 import Prelude as P
 import Data.Array.Accelerate as A
@@ -107,5 +107,5 @@ matTake i (AccMat e a _) c = AccMat (A.take i e) a c
 matDrop :: A.Num e => Exp Int -> AccMat e a b -> c -> AccMat e a c
 matDrop i (AccMat e a _) c = AccMat (A.drop i e) a c
 
-(++) :: A.Num e => AccMat e a b -> AccMat e a c -> d -> AccMat e a d
-(++) (AccMat e a _) (AccMat e' _ _ ) d = AccMat (e A.++ e') a d
+matAppend :: A.Num e => AccMat e a b -> AccMat e a c -> d -> AccMat e a d
+matAppend (AccMat e a _) (AccMat e' _ _ ) d = AccMat (e A.++ e') a d
