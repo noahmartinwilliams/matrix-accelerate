@@ -13,7 +13,7 @@ for both plain and dependently typed matrices.
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE GADTs #-}
-module Data.Array.Accelerate.Matrix(mMul, matMul, identMat, Mat(..), AccMat(..), matTransp, matAdd, mAdd, mSub, matSub, useMat, matScale, matTake, matDrop, matAppend, matZipMul) where
+module Data.Array.Accelerate.Matrix(mMul, matMul, identMat, Mat(..), AccMat(..), matTransp, matAdd, mAdd, mSub, matSub, useMat, matScale, matTake, matDrop, matAppend, matZipMul, matZipDiv, matMap) where
 
 import Prelude as P
 import Data.Array.Accelerate as A
@@ -114,3 +114,11 @@ matAppend (AccMat e a _) (AccMat e' _ _ ) d = AccMat (e A.++ e') a d
 -- |Element-wise multiplication
 matZipMul :: A.Num e => AccMat e a b -> AccMat e a b -> AccMat e a b
 matZipMul (AccMat e a b) (AccMat e' _ _) = AccMat (A.zipWith (*) e e') a b
+
+-- |Element-wise division
+matZipDiv :: (A.Num e, A.Fractional e) => AccMat e a b -> AccMat e a b -> AccMat e a b
+matZipDiv (AccMat e a b) (AccMat e' _ _) = AccMat (A.zipWith (/) e e') a b
+
+-- |Apply function element-wise
+matMap :: A.Num e => AccMat e a b -> (Exp e -> Exp e) -> AccMat e a b
+matMap (AccMat e a b) fn = AccMat (A.map fn e) a b
