@@ -13,7 +13,7 @@ for both plain and dependently typed matrices.
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE GADTs #-}
-module Data.Array.Accelerate.Matrix(mMul, matMul, identMat, Mat(..), AccMat(..), matTransp, matAdd, mAdd, mSub, matSub, useMat, matScale, matTake, matDrop, matAppend, matZipMul, matZipDiv, matMap) where
+module Data.Array.Accelerate.Matrix(mMul, matMul, identMat, Mat(..), AccMat(..), matTransp, matAdd, mAdd, mSub, matSub, useMat, matScale, matTake, matDrop, matAppend, matZipMul, matZipDiv, matMap, matSize) where
 
 import Prelude as P
 import Data.Array.Accelerate as A
@@ -122,3 +122,7 @@ matZipDiv (AccMat e a b) (AccMat e' _ _) = AccMat (A.zipWith (/) e e') a b
 -- |Apply function element-wise
 matMap :: A.Num e => AccMat e a b -> (Exp e -> Exp e) -> AccMat e a b
 matMap (AccMat e a b) fn = AccMat (A.map fn e) a b
+
+-- |Find the total number of elements in the matrix
+matSize :: A.Elt e => AccMat e a b -> Exp Int
+matSize (AccMat m _ _) = A.size m
