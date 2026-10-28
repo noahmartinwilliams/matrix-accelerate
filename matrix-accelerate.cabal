@@ -1,11 +1,11 @@
 cabal-version: 2.2
 
--- This file has been generated from package.yaml by hpack version 0.39.1.
+-- This file has been generated from package.yaml by hpack version 0.39.6.
 --
 -- see: https://github.com/sol/hpack
 
 name:           matrix-accelerate
-version:        0.1.0.0
+version:        0.2.0.0
 synopsis:       An accelerate library that adds dependently typed matrices.
 description:    An accelerate library that adds dependently typed matrices. This library adds the ability to do matrix manipulations with or without dependent types to help line up the operations so as to prevent runtime errors.
 category:       Accelerate, Matrices, GPU
