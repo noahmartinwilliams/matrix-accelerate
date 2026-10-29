@@ -13,7 +13,7 @@ for both plain and dependently typed matrices.
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE GADTs #-}
-module Data.Array.Accelerate.Matrix(mMul, matMul, identMat, Mat(..), AccMat(..), matTransp, matAdd, mAdd, mSub, matSub, useMat, matScale, matTake, matDrop, matAppend, matZipMul, matZipDiv, matMap, matSize, matZipWith) where
+module Data.Array.Accelerate.Matrix(mMul, matMul, identMat, Mat(..), AccMat(..), matTransp, matAdd, mAdd, mSub, matSub, useMat, matScale, matTake, matDrop, matAppend, matZipMul, matZipDiv, matMap, matSize, matZipWith, matMaximum') where
 
 import Prelude as P
 import Data.Array.Accelerate as A
@@ -111,22 +111,26 @@ matDrop i (AccMat e a _) c = AccMat (A.drop i e) a c
 matAppend :: A.Num e => AccMat e a b -> AccMat e a c -> d -> AccMat e a d
 matAppend (AccMat e a _) (AccMat e' _ _ ) d = AccMat (e A.++ e') a d
 
--- |Element-wise multiplication
+-- |Element-wise multiplication.
 matZipMul :: A.Num e => AccMat e a b -> AccMat e a b -> AccMat e a b
 matZipMul (AccMat e a b) (AccMat e' _ _) = AccMat (A.zipWith (*) e e') a b
 
--- |Element-wise division
+-- |Element-wise division.
 matZipDiv :: (A.Fractional e) => AccMat e a b -> AccMat e a b -> AccMat e a b
 matZipDiv (AccMat e a b) (AccMat e' _ _) = AccMat (A.zipWith (/) e e') a b
 
--- |Apply function element-wise
+-- |Apply function element-wise.
 matMap :: A.Num e => AccMat e a b -> (Exp e -> Exp e) -> AccMat e a b
 matMap (AccMat e a b) fn = AccMat (A.map fn e) a b
 
--- |Find the total number of elements in the matrix
+-- |Find the total number of elements in the matrix.
 matSize :: A.Elt e => AccMat e a b -> Exp Int
 matSize (AccMat m _ _) = A.size m
 
--- |Zip two matrices together with a function
+-- |Zip two matrices together with a function.
 matZipWith :: (A.Num e, A.Num e1, A.Num e2) => (Exp e -> Exp e1 -> Exp e2) -> AccMat e a b -> AccMat e1 a b -> AccMat e2 a b
 matZipWith fn (AccMat m _ _) (AccMat m' a b) = AccMat (A.zipWith fn m m') a b
+
+-- |Find the maximum value in a matrix.
+matMaximum' :: (A.Ord e) => AccMat e a b -> Exp e
+matMaximum' (AccMat m _ _) = A.the (A.maximum (A.flatten m))
